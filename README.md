@@ -1,7 +1,8 @@
 # Coding Speech through Vocal Tract Kinematics
 [Paper](https://arxiv.org/abs/2406.12998) | [Audio Samples](https://berkeley-speech-group.github.io/vac-demo)
+
 <div align="center">
-    <img src="images/articulatory_coding.png" alt="drawing" width="800"/>
+    <img src="images/articulatory_coding.png" alt="drawing" width="600"/>
 </div>
 This is the official code base for [Coding Speech through Vocal Tract Kinematics](https://arxiv.org/abs/2406.12998).
 
