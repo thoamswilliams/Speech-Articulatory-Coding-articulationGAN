@@ -33,7 +33,7 @@ coder = load_model("en", device= "cpu", use_penn=True)    # Use PENN for pitch t
 
 The following model checkpoints are offered. You can replace `en` with other models (`multi` or `en+`) in `load_model`.
 
-| Model  | Language |     Dataset    | 
+| Model  | Language |     Training Dataset    | 
 |--------|:--------:|:--------------:|
 | en     |  English |LibriTTS-R|
 | multi  |   Multi  |LibriTTS-R, Multilignual LibriSpeech, AISHELL, JVS, KSS    |
