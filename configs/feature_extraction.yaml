@@ -1,0 +1,28 @@
+##### Configuration for extracting features for training
+##### Generator and is skipped.
+## Base audio configs
+normalize: true # zscore input waveforms
+sr: 16000
+ft_sr: 50
+## Source feature configs
+crepe_model: full
+device: cuda
+fmax: 550
+fmin: 50
+pitch_q: 4
+periodicity_threshold: 0.0
+reflect_loudness: false
+loudness_threshold: 0.05 #1
+use_penn: false
+## Articulatory Inversion configs
+speech_model: microsoft/wavlm-large
+spk_ft_size: 1024
+target_layer: 9
+freqcut: 10
+## Hifi-GAN configs
+generator_configs: null
+## Checkpoint Info
+all_ckpt: null
+linear_model_path: null
+generator_ckpt: null
+spk_ft_ckpt: null
