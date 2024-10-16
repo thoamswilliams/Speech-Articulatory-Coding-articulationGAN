@@ -44,7 +44,7 @@ The following model checkpoints are offered. You can replace `en` with other mod
 
 ```python
 code = coder.encode(WAV_FILE)          # Single inference
-codes = coder.encode(List of WAV_FILE] # Batched processing
+codes = coder.encode([WAV_FILE1, WAV_FILE2, ...]) # Batched processing
 ```
 
 
