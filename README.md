@@ -4,6 +4,7 @@
 <div align="center">
     <img src="images/articulatory_coding.png" alt="drawing" width="600"/>
 </div>
+
 This is the official code base for [Coding Speech through Vocal Tract Kinematics](https://arxiv.org/abs/2406.12998).
 
 ## Installation
