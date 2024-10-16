@@ -135,6 +135,8 @@ class ArticulatoryCoding(BaseExtractor):
         outputs = self.source_extractor(wavs, outputs)
         outputs = self.speaker_encoder(wavs, outputs)
         outputs['ft_len'] = np.round(wavs.input_lens/320).astype(int)
+        if 'acoustics' in outputs:
+            del outputs['acoustics']
         if split_batch:
             outputs = self._split_batch(outputs)
             if len(outputs) ==1 and reduce:
