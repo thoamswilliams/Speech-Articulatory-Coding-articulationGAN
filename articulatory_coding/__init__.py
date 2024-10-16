@@ -1,1 +1,0 @@
-from .articulatory_coding import *

@@ -1,5 +1,5 @@
 # Coding Speech through Vocal Tract Kinematics
-[Paper](https://arxiv.org/abs/2406.12998) | [Audio Samples](https://berkeley-speech-group.github.io/vac-demo)
+[Paper](https://arxiv.org/abs/2406.12998) | [Audio Samples](https://berkeley-speech-group.github.io/sparc-demo)
 
 <div align="center">
     <img src="images/articulatory_coding.png" alt="drawing" width="600"/>
@@ -10,8 +10,8 @@ This is the official code base for [Coding Speech through Vocal Tract Kinematics
 ## Installation
 
 ```
-git clone https://github.com/cheoljun95/Vocaltract-Articulatory-Coding.git
-cd Vocaltract-Articulatory-Coding
+git clone https://github.com/cheoljun95/Speech-Articulatory-Coding.git
+cd Speech-Articulatory-Coding
 pip insall -e .
 ```
 
@@ -20,7 +20,7 @@ pip insall -e .
 #### Load Model
 
 ```python
-from articulatory_coding import load_model
+from sparc import load_model
 coder = load_model("en", device= "cpu")     # For using CPU
 coder = load_model("en", device= "cuda:0")  # For using GPU
 ```

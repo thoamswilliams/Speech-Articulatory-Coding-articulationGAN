@@ -15,7 +15,7 @@ model_name_map = {"en": "model_english_1500k",
                   "feature_extraction": "feature_extraction"}
 
 def download_huggingface(file_name):
-    return hf_hub_download(repo_id="cheoljun95/Vocaltract-Articulatory-Coding", filename=file_name,)
+    return hf_hub_download(repo_id="cheoljun95/Speech-Articulatory-Coding", filename=file_name,)
 
 def load_model(model_name=None, config=None, ckpt=None, 
                device="cuda",
@@ -66,11 +66,14 @@ def load_model(model_name=None, config=None, ckpt=None,
     for key, value in kwargs.items():
         if key in config.keys():
             config[key] = value
-    model = ArticulatoryCoding(**config)
+    model = SPARC(**config)
     return model
 
 
-class ArticulatoryCoding(BaseExtractor):
+class SPARC(BaseExtractor):
+    '''
+    Speech Articulatory Coding
+    '''
     def __init__(self, spk_ft_ckpt=None, generator_ckpt=None,
                  generator_configs=None, 
                  linear_model_path=None,
