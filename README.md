@@ -1,4 +1,4 @@
-# Coding Speech through Vocal Tract Kinematics
+# Speech Articulatory Coding (SPARC)
 [Paper](https://arxiv.org/abs/2406.12998) | [Audio Samples](https://berkeley-speech-group.github.io/sparc-demo)
 
 <div align="center">
