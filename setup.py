@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='articulatory-coding',  
+    name='speech-articulatory-coding',  
     version='0.1.0',
     author='Cheol Jun Cho',
     author_email='cheoljun@berkeley.edu',
