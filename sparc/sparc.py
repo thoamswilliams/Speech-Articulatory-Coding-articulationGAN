@@ -36,16 +36,13 @@ def load_model(model_name=None, config=None, ckpt=None,
                              **kwargs)
     if config != None:
         if not isinstance(config, dict):
-            if config[-5:] == '.ckpt':
-                return load_encodec(config=None, ckpt=config, device=device)
-            else:
-                import yaml
-                with open(config) as f:
-                    config = yaml.load(f, Loader=yaml.Loader)
-                if (ckpt is None and
-                   'all_ckpt' in config.keys() and
-                    config['all_ckpt'] is not None):
-                    ckpt = config['all_ckpt']
+            import yaml
+            with open(config) as f:
+                config = yaml.load(f, Loader=yaml.Loader)
+            if (ckpt is None and
+               'all_ckpt' in config.keys() and
+                config['all_ckpt'] is not None):
+                ckpt = config['all_ckpt']
     else:
         assert ckpt != None
 
