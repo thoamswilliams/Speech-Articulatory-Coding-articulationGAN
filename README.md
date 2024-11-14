@@ -1,5 +1,5 @@
 # Speech Articulatory Coding (SPARC)
-[Paper](https://arxiv.org/abs/2406.12998) | [Audio Samples](https://berkeley-speech-group.github.io/sparc-demo)
+[Paper](https://arxiv.org/abs/2406.12998) | [Audio Samples](https://berkeley-speech-group.github.io/sparc-demo) | [Colab Demo](https://colab.research.google.com/drive/1TVGJJpOzPiesLPo46gZNCQLMl-y_QIKe#scrollTo=uBemLVlk-s7W)
 
 <div align="center">
     <img src="images/articulatory_coding.png" alt="drawing" width="600"/>
