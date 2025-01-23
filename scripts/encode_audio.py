@@ -10,6 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--device", type=str, default='cuda:0')
 parser.add_argument("--wav_dir", type=str, )
 parser.add_argument("--save_dir", type=str, )
+parser.add_argument("--config_path", type=str, default=None)
 #parser.add_argument("--batch_size",type=int,default=1)
 
 if __name__ == "__main__":
@@ -22,19 +23,25 @@ if __name__ == "__main__":
     spk_emb_save_dir.mkdir(exist_ok=True)
     ft_save_dir = save_dir/"emasrc"
     ft_save_dir.mkdir(exist_ok=True)
-    
-    config_path = "../configs/feature_extraction.yaml"
     coder = load_model("feature_extraction",
-                       config=config_path, device=device) 
+                       config=args.config_path, 
+                       device=device) 
     
     wav_files = [f for f in wav_dir.glob("**/*.flac")] + [f for f in wav_dir.glob("**/*.wav")]
     
     for wav_file in tqdm.tqdm(wav_files):
-        outputs = coder.encode(wav_file, concat=True)
+        
         
         save_name = str(wav_file).replace(str(wav_dir),"")
         save_name = Path(save_name).stem+".npy"
+        path_depth = len(save_name.split("/"))
         
+        ft_save_path = ft_save_dir/save_name
+        spk_emb_save_path = spk_emb_save_dir/save_name
+        
+        if (spk_emb_save_path).exists():
+            continue
+            
         def _recursive_path_solver(file_path):
             if file_path.exists():
                 return
@@ -44,14 +51,13 @@ if __name__ == "__main__":
             else:
                 _recursive_path_solver(file_path.parent)
                 
-        path_depth = len(save_name.split("/"))
-        
-        ft_save_path = ft_save_dir/save_name
-        spk_emb_save_path = spk_emb_save_dir/save_name
-        
         _recursive_path_solver(spk_emb_save_path.parent)
         _recursive_path_solver(ft_save_path.parent)
         
+        try:
+            outputs = coder.encode(wav_file, concat=True)
+        except:
+            continue
         np.save(ft_save_path, outputs["features"])
         np.save(spk_emb_save_path, outputs["spk_emb"])
         

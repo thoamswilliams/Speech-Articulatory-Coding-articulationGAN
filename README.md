@@ -32,6 +32,13 @@ coder = load_model("en", device= "cpu", use_penn=True)    # Use PENN for pitch t
 
 ```
 
+For inversion only, you can use the following,
+
+```python
+coder = load_model("feature_extraction") 
+coder_from_config = load_model(config="configs/feature_extraction.yaml")
+```
+
 The following model checkpoints are offered. You can replace `en` with other models (`multi` or `en+`) in `load_model`.
 
 | Model  | Language |     Training Dataset    | 
@@ -79,6 +86,13 @@ sr = coder.sr
 #### Demo
 
 Please check `notebooks/demo.ipynb` for a demonstration of the functions.
+
+
+### Training
+
+#### Feature extraction
+
+Check `scripts/encode_audio.py` and an example script for extracting LibriTTS, `scripts/extract_libritts.sh`
 
 
 ## TODO
