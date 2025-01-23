@@ -1,1 +1,0 @@
-python encode_audio.py --wav_dir=/data/common/LibriTTS/wavs --save_dir=/data/common/LibriTTS/sparc --device=cuda:0
