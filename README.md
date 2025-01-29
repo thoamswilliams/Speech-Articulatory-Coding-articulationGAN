@@ -98,5 +98,4 @@ Check `scripts/encode_audio.py` and an example script for extracting LibriTTS, `
 ## TODO
 
 - Add training codes.
-- Add pypi installation.
 
