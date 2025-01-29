@@ -10,9 +10,7 @@ This is the official code base for [Coding Speech through Vocal Tract Kinematics
 ## Installation
 
 ```
-git clone https://github.com/cheoljun95/Speech-Articulatory-Coding.git
-cd Speech-Articulatory-Coding
-pip install -e .
+pip install speech-articulatory-coding
 ```
 
 ## Usage
