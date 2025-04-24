@@ -313,7 +313,7 @@ class HiFiGANGenerator(torch.nn.Module):
             Tensor: Output tensor (B, out_channels, T).
 
         """
-        c[:,self.pitch_axis] = (c[:,self.pitch_axis]-self.pitch_offset)*self.pitch_rescale
+        #c[:,self.pitch_axis] = (c[:,self.pitch_axis]-self.pitch_offset)*self.pitch_rescale
         c = self.input_conv(c)
         # print('after input_conv', c.shape)
         for i in range(self.num_upsamples):

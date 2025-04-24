@@ -161,6 +161,14 @@ class SPARC(BaseExtractor):
             cout = self.generator(art, spk_emb)
         wav = cout[:,0].squeeze(0).cpu().numpy()
         return wav
+
+    def decode_with_grad(self, in_feats, spk_emb, **kwargs):
+        assert self.generator is not None, "Synthesizer is not loaded!"
+        spk_emb = torch.from_numpy(spk_emb).float().to(self.device)
+        spk_emb = self.speaker_encoder._decode_spk_emb(spk_emb)
+        cout = self.generator(in_feats, spk_emb)
+        wav = cout[:,0].squeeze(0)
+        return wav
         
     
     def _shift_pitch(self, pitch, original_stats, target_stats):
