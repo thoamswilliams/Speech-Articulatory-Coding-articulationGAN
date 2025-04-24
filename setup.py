@@ -1,14 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='articulatory-coding',  
+    name='speech-articulatory-coding',  
     version='0.1.0',
     author='Cheol Jun Cho',
     author_email='cheoljun@berkeley.edu',
     description='Python code for analyzing and synthesizing articulatory features of speech',
-    #long_description=open('README.md', encoding='utf-8').read(),
-    #long_description_content_type='text/markdown',
-    url='https://github.com/cheoljun95/Vocaltract-Articulatory-Coding',  
+    long_description=open('README.md', encoding='utf-8').read(),
+    long_description_content_type='text/markdown',
+    url='https://github.com/Berkeley-Speech-Group/Speech-Articulatory-Coding',  
     packages=find_packages(),
     classifiers=[
         'Programming Language :: Python :: 3',

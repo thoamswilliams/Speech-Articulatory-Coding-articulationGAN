@@ -36,16 +36,13 @@ def load_model(model_name=None, config=None, ckpt=None,
                              **kwargs)
     if config != None:
         if not isinstance(config, dict):
-            if config[-5:] == '.ckpt':
-                return load_encodec(config=None, ckpt=config, device=device)
-            else:
-                import yaml
-                with open(config) as f:
-                    config = yaml.load(f, Loader=yaml.Loader)
-                if (ckpt is None and
-                   'all_ckpt' in config.keys() and
-                    config['all_ckpt'] is not None):
-                    ckpt = config['all_ckpt']
+            import yaml
+            with open(config) as f:
+                config = yaml.load(f, Loader=yaml.Loader)
+            if (ckpt is None and
+               'all_ckpt' in config.keys() and
+                config['all_ckpt'] is not None):
+                ckpt = config['all_ckpt']
     else:
         assert ckpt != None
 
@@ -79,7 +76,7 @@ class SPARC(BaseExtractor):
                  linear_model_path=None,
                  linear_model_state_dict=None,
                  speech_model='microsoft/wavlm-large', 
-                 target_layer=9, freqcut=10, spk_target_layer=0, 
+                 target_layer=9, freqcut=10, spk_target_layer=0, zero_pad=False,
                  pitch_q=1, fmin=50, fmax=550, crepe_model="full", use_penn=False,
                  spk_ft_size=1024, spk_emb_size=64, 
                  device='cuda', normalize=True, sr=16000, ft_sr=50,
@@ -92,7 +89,7 @@ class SPARC(BaseExtractor):
         self.inverter = Inversion(linear_model_path, linear_model_state_dict=linear_model_state_dict,
                                   speech_model=speech_model,
                                   target_layer=target_layer, spk_target_layer=spk_target_layer,
-                                  freqcut=freqcut, **common_configs)
+                                  freqcut=freqcut, zero_pad=zero_pad, **common_configs)
         self.source_extractor =  SourceExtractor(pitch_q=pitch_q, fmin=fmin,
                                                  fmax=fmax, crepe_model=crepe_model, 
                                                  periodicity_threshold=periodicity_threshold,
@@ -130,7 +127,8 @@ class SPARC(BaseExtractor):
         self.speaker_encoder.to(device)
     
     
-    def encode(self, wavs, split_batch=True, reduce=True):
+    def encode(self, wavs, split_batch=True, reduce=True, 
+               concat=False):
         wavs = self.process_wavfiles(wavs)
         outputs = {}
         include_acoustics=True
@@ -144,12 +142,22 @@ class SPARC(BaseExtractor):
             outputs = self._split_batch(outputs)
             if len(outputs) ==1 and reduce:
                 outputs = outputs[0]
+        if concat:
+            outputs = {'features':self._match_and_cat([outputs['ema'],
+                                                       outputs['pitch'],
+                                                       outputs['loudness'],
+                                                       outputs['periodicity']]),
+                       'spk_emb': outputs['spk_emb']}
+        
         return outputs
+    
+    
+    
     
     def decode(self, ema, pitch, loudness, spk_emb, **kwargs):
         assert self.generator is not None, "Synthesizer is not loaded!"
         is_batch = len(ema.shape)==3
-        art = self._match_and_cat([ema, pitch, loudness], axis=1 if is_batch else 0)
+        art = self._match_and_cat([ema, pitch, loudness])
         art = torch.from_numpy(art).float().to(self.device)
         spk_emb = torch.from_numpy(spk_emb).float().to(self.device)
         if not is_batch:

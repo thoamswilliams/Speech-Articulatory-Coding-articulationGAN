@@ -1,0 +1,1 @@
+python encode_audio.py --wav_dir=/data/common/LibriTTS_R/wavs --save_dir=/data/common/LibriTTS_R/ --device=cuda:0

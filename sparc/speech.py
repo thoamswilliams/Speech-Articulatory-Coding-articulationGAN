@@ -26,8 +26,12 @@ class BaseExtractor(object):
         self.normalize= normalize
         self.device = device
 
-    def _match_and_cat(self, arrs, axis=0, concat=True):
-
+    def _match_and_cat(self, arrs, concat=True):
+        
+        if np.max([len(arr.shape) for arr in arrs])==3:
+            axis = 1
+        else:
+            axis = 0
         min_len = np.min([arr.shape[axis] for arr in arrs])
         if axis ==0:
             arrs = [arr[:min_len] for arr in arrs]
